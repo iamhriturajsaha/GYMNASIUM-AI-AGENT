@@ -1,4 +1,4 @@
-# 🏋️ Gymnasium AI Agent
+# 🏋️Gymnasium AI Agent
 
 ## 🚀 Overview
 Gymnasium AI Agent is a multi-agent AI system designed to help users manage workouts, track fitness progress and receive intelligent exercise guidance. The system demonstrates -
