@@ -10,7 +10,7 @@ Gymnasium AI Agent is a multi-agent AI system designed to help users manage work
 
 This project simulates a real-world AI fitness assistant capable of reasoning, planning and executing actions using tools.
 
-📄 Google Cloud Run Link - https://student-guide-315961907444.europe-west1.run.app
+📄 Google Cloud Run Link - https://gymnasium-agent-805504669798.us-central1.run.app
 
 ## Quick Glance
 <p align="center">
