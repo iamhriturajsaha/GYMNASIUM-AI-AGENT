@@ -10,6 +10,15 @@ Gymnasium AI Agent is a multi-agent AI system designed to help users manage work
 
 This project simulates a real-world AI fitness assistant capable of reasoning, planning and executing actions using tools.
 
+📄 Google Cloud Run Link - https://student-guide-315961907444.europe-west1.run.app
+
+## Quick Glance
+<p align="center">
+  <img src="Screenshots/1.png" alt="1" width="1000"/><br>
+  <img src="Screenshots/2.png" alt="2" width="1000"/><br>
+  <img src="Screenshots/3.png" alt="3" width="1000"/><br>
+</p>
+
 ## 🧠 Key Features
 ### ✅ Multi-Agent Architecture
 * Root Agent → Handles user input and orchestrates flow.
@@ -163,11 +172,10 @@ POST /api/v1/gymnasium/chat
 * LLM - Gemini (configurable).
 
 ## 📌 Why This Project Matters
-This project showcases how AI agents move beyond chatbots** into -
+This project showcases how AI agents move beyond chatbots into -
 * Action-oriented systems.
 * Tool-using assistants.
 * Workflow automation engines.
 
 It bridges the gap between -
-
 > Conversation → Execution → Real-world impact.
