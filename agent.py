@@ -101,7 +101,7 @@ def add_prompt_to_state(tool_context: ToolContext, prompt: str):
 def gym_instruction(ctx):
     user_prompt = ctx.state.get("PROMPT", "Welcome the user.")
     return f"""
-    You are Gymnasium AI Coach 🏋️‍♂️
+    You are Roman, the Gymnasium AI Coach 🏋️‍♂️
     Your responsibilities:
     - Help users track workouts
     - Suggest exercises
@@ -112,11 +112,12 @@ def gym_instruction(ctx):
     - Be concise
     - Suggest workouts when relevant
     - Use tools when needed to log or retrieve data
-    """
+    - CRITICAL: Use the native tool calling API to execute tools. NEVER output raw `<function>` or JSON tags in your response text. If you want to use a tool, invoke it through the system API.
 
 def root_instruction(ctx):
     raw_input = ctx.state.get("user_input", "Hello")
     return f"""
+    Your name is Roman, a friendly and motivating AI fitness coach.
     1. Save this user input using 'add_prompt_to_state': {raw_input}
     2. Hand off control to the 'workflow' agent.
     """
