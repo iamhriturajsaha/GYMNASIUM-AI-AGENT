@@ -1,16 +1,16 @@
-# 🏋️Gymnasium AI Agent
+# 🏋️ Gymnasium AI Agent (Roman)
 
 ## 🚀 Overview
-Gymnasium AI Agent is a multi-agent AI system designed to help users manage workouts, track fitness progress and receive intelligent exercise guidance. The system demonstrates -
-* Multi-agent coordination.
-* Tool integration via MCP (Model Context Protocol).
-* Persistent data storage using a database.
+**Gymnasium AI Agent** is a multi-agent AI system designed to help you manage workouts, track fitness progress and receive intelligent exercise guidance. The system demonstrates -
+* Multi-agent coordination (ADK).
+* Native tool integration for database operations.
+* Persistent data storage using SQLite.
 * Multi-step workflow execution.
-* API-based deployment.
+* API-based deployment on Render.
 
 This project simulates a real-world AI fitness assistant capable of reasoning, planning and executing actions using tools.
 
-📄 Google Cloud Run Link - https://gymnasium-agent-805504669798.us-central1.run.app
+🌐 **Live Demo** → https://gymnasium-ai-agent.onrender.com
 
 ## Quick Glance
 <p align="center">
@@ -21,42 +21,42 @@ This project simulates a real-world AI fitness assistant capable of reasoning, p
 
 ## 🧠 Key Features
 ### ✅ Multi-Agent Architecture
-* Root Agent → Handles user input and orchestrates flow.
-* Gym Coach Agent → Executes fitness-related tasks.
+* **Root Agent** → Handles user input and orchestrates flow.
+* **Roman (Gym Coach Agent)** → Motivates, plans and executes fitness-related tasks.
 
-### 🔧 MCP Tool Integration
+### 🔧 Native Tool Integration
 * Log workouts.
 * Track fitness progress.
 * Retrieve workout history.
 * Store structured data.
 
 ### 💾 Persistent Storage
-* Uses Google Cloud Datastore.
+* Uses a local **SQLite Database** (`gymnasium.db`).
 * Stores -
   * Workout sessions.
   * Fitness progress logs.
 
 ### 🔄 Multi-Step Workflow Handling
-* Supports chained operations -
+* Supports chained operations - 
   * Log workout + track weight.
   * Retrieve history after logging.
   * Combine multiple tool calls in one request.
 
 ### 🌐 API-Based System
-* Built with FastAPI.
-* Fully deployable backend service.
+* Built with **FastAPI**.
+* Fully deployable backend service on Render.
 
 ## 🏗️ System Architecture
-```
+```text
 User Input
    ↓
 Root Agent (Intent Handling)
    ↓
-Gym Coach Agent (Execution)
+Roman / Gym Coach Agent (Execution)
    ↓
-MCP Tools (Workout / Progress)
+Tools (Workout / Progress)
    ↓
-Database (Datastore)
+SQLite Database
    ↓
 Response to User
 ```
@@ -67,92 +67,100 @@ Response to User
 * Stores input in shared state.
 * Delegates execution to workflow agent.
 
-### 🏋️ Gym Coach Agent
-Responsible for -
+### 🏋️ Roman (Gym Coach Agent)
+Responsible for - 
 * Workout tracking.
 * Fitness guidance.
 * Progress logging.
 * Tool invocation.
 
-## 🔧 MCP Tools
-### 1. add_workout
-Logs a workout session.
+## 🧠 Technical Stack
+* **Backend -** FastAPI
+* **Agents -** Google ADK
+* **LLM Integration -** LiteLLM
+* **Database -** SQLite
+* **LLM Provider -** Groq (Llama 3)
 
-Input -
-* exercise.
-* reps.
-* sets.
+## 🔧 Tools Included
+### 1. `add_workout`
+Logs a workout session (exercise, reps, sets).
 
-### 2. list_workouts
-Retrieves all logged workouts.
+### 2. `list_workouts`
+Retrieves recent logged workouts.
 
-### 3. log_fitness_progress
-Stores weight and notes.
+### 3. `log_fitness_progress`
+Stores body weight and notes.
 
-Input -
-* weight.
-* note.
-
-### 4. get_progress
+### 4. `get_progress`
 Returns fitness history.
 
-## 💾 Database Schema
-### Workout Entity
+## 💾 Database Schema (SQLite)
+### `workouts` Table
 | Field      | Type     |
 | ---------- | -------- |
-| exercise   | string   |
-| reps       | int      |
-| sets       | int      |
-| created_at | datetime |
+| id         | INTEGER  |
+| exercise   | TEXT     |
+| reps       | INTEGER  |
+| sets       | INTEGER  |
+| created_at | TEXT     |
 
-### FitnessLog Entity
-| Field  | Type     |
-| ------ | -------- |
-| weight | float    |
-| note   | string   |
-| date   | datetime |
+### `progress` Table
+| Field      | Type     |
+| ------     | -------- |
+| id         | INTEGER  |
+| weight     | REAL     |
+| note       | TEXT     |
+| created_at | TEXT     |
 
 ## 📡 API Usage
-### Endpoint -
-```
+### Endpoint
+```http
 POST /api/v1/gymnasium/chat
 ```
 
-### Request Body -
+### Request Body
 ```json
 {
   "prompt": "Log workout: pushups 15 reps 3 sets"
 }
 ```
 
-### Response -
+### Response
 ```json
 {
   "status": "success",
-  "reply": "🏋️ Workout 'pushups' logged (ID: 123)"
+  "reply": "🏋️ Workout 'pushups' logged (ID: 1)"
 }
 ```
 
+## 🚀 Deployment Details
+* **Hosted on -** Render.
+* **Containerized using -** Docker.
+* **AI Provider -** Groq via LiteLLM (`llama-3.3-70b-versatile`).
+
+### Environment Variables Required
+* `GROQ_API_KEY` - Your Groq API key.
+* `MODEL` - `llama-3.3-70b-versatile`.
+
 ## 🧪 Testing the Agent
 ### ✅ Basic Commands
-* Log workout - pushups 15 reps 3 sets.
-* Show my workouts.
+* "Log workout - pushups 15 reps 3 sets."
+* "Show my recent workouts."
 
 ### 🔄 Multi-Step Commands
-* Log workout and show history.
-* Add workout and log my weight as 70kg.
+* "Log my workout and show my history."
+* "Add workout and log my weight as 70kg."
 
 ### 📊 Progress Tracking
-* Log my weight as 75kg.
-* Show my progress.
+* "Log my weight as 75kg feeling great."
+* "Show my progress."
 
 ### 🧠 Intelligent Queries
-* Suggest a beginner workout plan.
-* What should I do for chest day?
+* "Suggest a beginner workout plan."
+* "What should I do for chest day?"
 
 ## 🏆 Project Highlights
 * Demonstrates agent orchestration.
-* Uses real tool execution (MCP).
 * Implements persistent memory.
 * Handles multi-step workflows.
 * Designed as a real-world AI system.
@@ -163,19 +171,3 @@ POST /api/v1/gymnasium/chat
 * 📊 Dashboard (Streamlit) for visualization.
 * 🍎 Diet planning agent.
 * 📈 Progress analytics and insights.
-
-## 🧠 Technical Stack
-* Backend - FastAPI.
-* Agents - Google ADK.
-* Tools - MCP (FastMCP).
-* Database - Google Cloud Datastore.
-* LLM - Gemini (configurable).
-
-## 📌 Why This Project Matters
-This project showcases how AI agents move beyond chatbots into -
-* Action-oriented systems.
-* Tool-using assistants.
-* Workflow automation engines.
-
-It bridges the gap between -
-> Conversation → Execution → Real-world impact.
