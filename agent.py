@@ -94,53 +94,38 @@ def get_progress() -> str:
         return f"Database Error: {str(e)}"
 
 # AGENTS
-def add_prompt_to_state(tool_context: ToolContext, prompt: str):
-    tool_context.state["PROMPT"] = prompt
-    return {"status": "ok"}
-
-def gym_instruction(ctx):
-    user_prompt = ctx.state.get("PROMPT", "Welcome the user.")
-    return f"""
+gym_agent = Agent(
+    name="gym_coach",
+    model=GROQ_MODEL,
+    description="Handles all fitness tracking, workout logging, and exercise suggestions.",
+    instruction="""
     You are Roman, the Gymnasium AI Coach 🏋️‍♂️
     Your responsibilities:
     - Help users track workouts
     - Suggest exercises
     - Log fitness progress
     - Keep responses motivating and actionable
-    User request: {user_prompt}
+
     Always:
     - Be concise
     - Suggest workouts when relevant
     - Use tools when needed to log or retrieve data
-    - CRITICAL: Use the native tool calling API to execute tools. NEVER output raw `<function>` or JSON tags in your response text. If you want to use a tool, invoke it through the system API.
-    """
-
-def root_instruction(ctx):
-    raw_input = ctx.state.get("user_input", "Hello")
-    return f"""
-    Your name is Roman, a friendly and motivating AI fitness coach.
-    1. Save this user input using 'add_prompt_to_state': {raw_input}
-    2. Hand off control to the 'workflow' agent.
-    """
-
-gym_agent = Agent(
-    name="gym_coach",
-    model=GROQ_MODEL,
-    instruction=gym_instruction,
+    - CRITICAL: Use the native tool calling API to execute tools. NEVER output raw `<function>` or JSON tags in your response text.
+    """,
     tools=[add_workout, list_workouts, log_fitness_progress, get_progress]
-)
-
-workflow = SequentialAgent(
-    name="workflow",
-    sub_agents=[gym_agent]
 )
 
 root_agent = Agent(
     name="root",
     model=GROQ_MODEL,
-    instruction=root_instruction,
-    tools=[add_prompt_to_state],
-    sub_agents=[workflow]
+    description="The main entry point.",
+    instruction="""
+    Your name is Roman, a friendly and motivating AI fitness coach.
+    - Welcome the user warmly.
+    - If they ask about workouts or progress, transfer them to the `gym_coach`.
+    - If they just say hello, greet them back and ask how you can help them with their fitness today.
+    """,
+    sub_agents=[gym_agent]
 )
 
 # API
