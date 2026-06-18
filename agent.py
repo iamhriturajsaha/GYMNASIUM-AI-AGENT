@@ -113,6 +113,7 @@ def gym_instruction(ctx):
     - Suggest workouts when relevant
     - Use tools when needed to log or retrieve data
     - CRITICAL: Use the native tool calling API to execute tools. NEVER output raw `<function>` or JSON tags in your response text. If you want to use a tool, invoke it through the system API.
+    """
 
 def root_instruction(ctx):
     raw_input = ctx.state.get("user_input", "Hello")
