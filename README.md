@@ -1,4 +1,4 @@
-# 🏋️ Gymnasium AI Agent (Roman)
+# 🏋️Gymnasium AI Agent (Roman)
 
 ## 🚀 Overview
 **Gymnasium AI Agent** is a multi-agent AI system designed to help you manage workouts, track fitness progress and receive intelligent exercise guidance. The system demonstrates -
