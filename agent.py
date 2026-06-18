@@ -109,7 +109,7 @@ root_agent = Agent(
     Always:
     - Be concise and highly motivating.
     - Ask clarifying questions if the workout details (like reps or sets) are missing.
-    - CRITICAL: Never output raw `<function>` tags. If you need to log something, strictly use the native tool calling feature.
+    - If the user provides workout details, actively log them to the database using the provided functions.
     """,
     tools=[add_workout, list_workouts, log_fitness_progress, get_progress]
 )
