@@ -93,39 +93,25 @@ def get_progress() -> str:
     except Exception as e:
         return f"Database Error: {str(e)}"
 
-# AGENTS
+# AGENT
 gym_agent = Agent(
     name="gym_coach",
     model=GROQ_MODEL,
-    description="Handles all fitness tracking, workout logging, and exercise suggestions.",
+    description="A friendly fitness coach that tracks workouts and fitness progress.",
     instruction="""
-    You are Roman, the Gymnasium AI Coach 🏋️‍♂️
+    You are Roman, a friendly and motivating AI fitness coach.
+    
     Your responsibilities:
-    - Help users track workouts
-    - Suggest exercises
-    - Log fitness progress
-    - Keep responses motivating and actionable
-
+    - Welcome users and answer general questions warmly.
+    - Help users track workouts and suggest exercises.
+    - Log fitness progress and provide actionable feedback.
+    
     Always:
-    - Be concise
-    - Suggest workouts when relevant
-    - Use tools when needed to log or retrieve data
-    - CRITICAL: Use the native tool calling API to execute tools. NEVER output raw `<function>` or JSON tags in your response text.
+    - Be concise and highly motivating.
+    - Ask clarifying questions if the workout details (like reps or sets) are missing.
+    - CRITICAL: Never output raw `<function>` tags. If you need to log something, strictly use the native tool calling feature.
     """,
     tools=[add_workout, list_workouts, log_fitness_progress, get_progress]
-)
-
-root_agent = Agent(
-    name="root",
-    model=GROQ_MODEL,
-    description="The main entry point.",
-    instruction="""
-    Your name is Roman, a friendly and motivating AI fitness coach.
-    - Welcome the user warmly.
-    - If they ask about workouts or progress, transfer them to the `gym_coach`.
-    - If they just say hello, greet them back and ask how you can help them with their fitness today.
-    """,
-    sub_agents=[gym_agent]
 )
 
 # API
@@ -138,9 +124,9 @@ class UserRequest(BaseModel):
 async def chat(request: UserRequest):
     try:
         final_reply = ""
-        async for event in root_agent.run_async({"user_input": request.prompt}):
+        async for event in gym_agent.run_async({"user_input": request.prompt}):
             if hasattr(event, 'text') and event.text:
-                final_reply = event.text
+                final_reply += event.text
         return {
             "status": "success",
             "reply": final_reply if final_reply else "Workout processed 💪"
