@@ -31,7 +31,7 @@ This project simulates a real-world AI fitness assistant capable of reasoning, p
 * Store structured data.
 
 ### 💾 Persistent Storage
-* Uses a local **SQLite Database** (`gymnasium.db`).
+* Uses a local SQLite Database (`gymnasium.db`).
 * Stores -
   * Workout sessions.
   * Fitness progress logs.
@@ -43,7 +43,7 @@ This project simulates a real-world AI fitness assistant capable of reasoning, p
   * Combine multiple tool calls in one request.
 
 ### 🌐 API-Based System
-* Built with **FastAPI**.
+* Built with FastAPI.
 * Fully deployable backend service on Render.
 
 ## 🏗️ System Architecture
@@ -75,11 +75,11 @@ Responsible for -
 * Tool invocation.
 
 ## 🧠 Technical Stack
-* **Backend -** FastAPI
-* **Agents -** Google ADK
-* **LLM Integration -** LiteLLM
-* **Database -** SQLite
-* **LLM Provider -** Groq (Llama 3)
+* **Backend -** FastAPI.
+* **Agents -** Google ADK.
+* **LLM Integration -** LiteLLM.
+* **Database -** SQLite.
+* **LLM Provider -** Groq (Llama 3).
 
 ## 🔧 Tools Included
 ### 1. `add_workout`
@@ -140,7 +140,7 @@ POST /api/v1/gymnasium/chat
 
 ### Environment Variables Required
 * `GROQ_API_KEY` - Your Groq API key.
-* `MODEL` - `llama-3.3-70b-versatile`.
+* `MODEL` - llama-3.3-70b-versatile.
 
 ## 🧪 Testing the Agent
 ### ✅ Basic Commands
