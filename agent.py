@@ -23,9 +23,7 @@ GROQ_MODEL = LiteLlm(model=f"groq/{os.getenv('MODEL', 'llama-3.3-70b-versatile')
 
 # DATABASE SETUP (SQLite for Render compatibility)
 def get_db():
-    # Vercel serverless functions only have write access to /tmp
-    db_path = "/tmp/gymnasium.db" if os.environ.get("VERCEL") else "gymnasium.db"
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect("gymnasium.db")
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -122,15 +120,11 @@ app = FastAPI()
 class UserRequest(BaseModel):
     prompt: str
 
-@app.get("/")
-async def root():
-    return {"message": "Gymnasium AI Agent is running! Use POST /api/v1/gymnasium/chat to interact."}
-
 @app.post("/api/v1/gymnasium/chat")
 async def chat(request: UserRequest):
     try:
         final_reply = ""
-        async for event in root_agent.run_async(request.prompt):
+        async for event in root_agent.run_async({"user_input": request.prompt}):
             if hasattr(event, 'text') and event.text:
                 final_reply += event.text
         return {
