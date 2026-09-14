@@ -19,7 +19,7 @@ logging.basicConfig(
 load_dotenv()
 
 # MODEL SETUP (Native Gemini)
-GEMINI_MODEL = Gemini(model="gemini-2.5-flash")
+GEMINI_MODEL = Gemini(model="gemini-1.5-flash")
 
 # DATABASE SETUP (SQLite for Render compatibility)
 def get_db():
