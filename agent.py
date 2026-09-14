@@ -122,6 +122,10 @@ app = FastAPI()
 class UserRequest(BaseModel):
     prompt: str
 
+@app.get("/")
+async def root():
+    return {"message": "Gymnasium AI Agent is running! Use POST /api/v1/gymnasium/chat to interact."}
+
 @app.post("/api/v1/gymnasium/chat")
 async def chat(request: UserRequest):
     try:
