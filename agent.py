@@ -126,11 +126,16 @@ async def chat(request: UserRequest):
         final_reply = ""
         # Pass string directly to avoid dict 'model_copy' crash
         async for event in root_agent.run_async(request.prompt):
+            logging.info(f"ADK EVENT YIELDED: {type(event)} - {event}")
+            
             # Check standard ADK event structure
             if hasattr(event, 'content') and event.content and hasattr(event.content, 'parts') and event.content.parts:
                 final_reply += event.content.parts[0].text
             elif hasattr(event, 'text') and event.text:
                 final_reply += event.text
+            else:
+                # Force the event into the output so it's not blank
+                final_reply += f"\n[Raw Event: {str(event)}]\n"
         return {
             "status": "success",
             "reply": final_reply if final_reply else "Workout processed 💪"
