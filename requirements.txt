@@ -1,0 +1,6 @@
+google-adk==1.14.0
+fastapi
+uvicorn
+pydantic
+python-dotenv
+litellm>=1.40.0
