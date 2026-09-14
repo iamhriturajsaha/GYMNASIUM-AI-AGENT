@@ -8,7 +8,7 @@ from pydantic import BaseModel
 import uvicorn
 from google.adk import Agent
 from google.adk.agents import SequentialAgent
-from google.adk.models.gemini import Gemini
+from google.adk.models.google_llm import Gemini
 from google.adk.tools.tool_context import ToolContext
 
 # LOGGING
