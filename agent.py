@@ -8,7 +8,7 @@ from pydantic import BaseModel
 import uvicorn
 from google.adk import Agent
 from google.adk.agents import SequentialAgent
-from google.adk.models.lite_llm import LiteLlm
+from google.adk.models.gemini import Gemini
 from google.adk.tools.tool_context import ToolContext
 
 # LOGGING
@@ -18,8 +18,8 @@ logging.basicConfig(
 )
 load_dotenv()
 
-# MODEL SETUP (Gemini via LiteLLM)
-GEMINI_MODEL = LiteLlm(model="gemini/gemini-1.5-pro")
+# MODEL SETUP (Native Gemini)
+GEMINI_MODEL = Gemini(model="gemini-2.5-flash")
 
 # DATABASE SETUP (SQLite for Render compatibility)
 def get_db():
