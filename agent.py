@@ -130,7 +130,7 @@ async def root():
 async def chat(request: UserRequest):
     try:
         final_reply = ""
-        async for event in root_agent.run_async({"user_input": request.prompt}):
+        async for event in root_agent.run_async(request.prompt):
             if hasattr(event, 'text') and event.text:
                 final_reply += event.text
         return {
