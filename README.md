@@ -79,7 +79,7 @@ Responsible for -
 * **Agents -** Google ADK.
 * **LLM Integration -** LiteLLM.
 * **Database -** SQLite.
-* **LLM Provider -** Groq (Llama 3).
+* **LLM Provider -** OpenAI (gpt-4o-mini).
 
 ## 🔧 Tools Included
 ### 1. `add_workout`
@@ -136,11 +136,11 @@ POST /api/v1/gymnasium/chat
 ## 🚀 Deployment Details
 * **Hosted on -** Render.
 * **Containerized using -** Docker.
-* **AI Provider -** Groq via LiteLLM (`llama-3.3-70b-versatile`).
+* **AI Provider -** OpenAI via LiteLLM (`gpt-4o-mini`).
 
 ### Environment Variables Required
-* `GROQ_API_KEY` - Your Groq API key.
-* `MODEL` - llama-3.3-70b-versatile.
+* `OPENAI_API_KEY` - Your OpenAI API key.
+* `MODEL` - gpt-4o-mini.
 
 ## 🧪 Testing the Agent
 ### ✅ Basic Commands
