@@ -19,7 +19,7 @@ logging.basicConfig(
 load_dotenv()
 
 # MODEL SETUP (Gemini via LiteLLM)
-GEMINI_MODEL = LiteLlm(model="gemini/gemini-1.5-flash")
+GEMINI_MODEL = LiteLlm(model="gemini/gemini-1.5-flash-latest")
 
 # DATABASE SETUP (SQLite for Render compatibility)
 def get_db():
