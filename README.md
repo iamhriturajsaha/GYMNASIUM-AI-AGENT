@@ -1,7 +1,7 @@
 # 🏋️Gymnasium AI Agent
 
 ## 🚀 Overview
-**Gymnasium AI Agent** is a multi-agent AI system designed to help you manage workouts, track fitness progress and receive intelligent exercise guidance. The system demonstrates -
+Gymnasium AI Agent is a multi-agent AI system designed to help you manage workouts, track fitness progress and receive intelligent exercise guidance. The system demonstrates -
 * Multi-agent coordination (ADK).
 * Native tool integration for database operations.
 * Persistent data storage using SQLite.
@@ -22,7 +22,7 @@ This project simulates a real-world AI fitness assistant capable of reasoning, p
 ## 🧠 Key Features
 ### ✅ Multi-Agent Architecture
 * **Root Agent** → Handles user input and orchestrates flow.
-* **Roman (Gym Coach Agent)** → Motivates, plans and executes fitness-related tasks.
+* **Gym Coach Agent** → Motivates, plans and executes fitness-related tasks.
 
 ### 🔧 Native Tool Integration
 * Log workouts.
