@@ -124,8 +124,12 @@ class UserRequest(BaseModel):
 async def chat(request: UserRequest):
     try:
         final_reply = ""
-        async for event in root_agent.run_async({"user_input": request.prompt}):
-            if hasattr(event, 'text') and event.text:
+        # Pass string directly to avoid dict 'model_copy' crash
+        async for event in root_agent.run_async(request.prompt):
+            # Check standard ADK event structure
+            if hasattr(event, 'content') and event.content and hasattr(event.content, 'parts') and event.content.parts:
+                final_reply += event.content.parts[0].text
+            elif hasattr(event, 'text') and event.text:
                 final_reply += event.text
         return {
             "status": "success",
