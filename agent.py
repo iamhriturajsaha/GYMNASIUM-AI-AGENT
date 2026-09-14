@@ -18,8 +18,8 @@ logging.basicConfig(
 )
 load_dotenv()
 
-# MODEL SETUP (Groq via LiteLLM)
-GROQ_MODEL = LiteLlm(model=f"groq/{os.getenv('MODEL', 'llama-3.1-8b-instant')}")
+# MODEL SETUP (Gemini via LiteLLM)
+GEMINI_MODEL = LiteLlm(model="gemini/gemini-1.5-flash")
 
 # DATABASE SETUP (SQLite for Render compatibility)
 def get_db():
@@ -96,7 +96,7 @@ def get_progress() -> str:
 # AGENT
 root_agent = Agent(
     name="gym_coach",
-    model=GROQ_MODEL,
+    model=GEMINI_MODEL,
     description="A friendly fitness coach that tracks workouts and fitness progress.",
     instruction="""
     You are Roman, a friendly and motivating AI fitness coach.
