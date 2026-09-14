@@ -10,7 +10,7 @@ Gymnasium AI Agent is a multi-agent AI system designed to help you manage workou
 
 This project simulates a real-world AI fitness assistant capable of reasoning, planning and executing actions using tools.
 
-🌐 **Live Demo** → https://gymnasium-ai-agent.onrender.com
+🌐 **Live Demo** → https://gymnasium-ai-agent-0php.onrender.com
 
 ## Quick Glance
 <p align="center">
