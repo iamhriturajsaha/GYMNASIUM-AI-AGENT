@@ -8,7 +8,7 @@ from pydantic import BaseModel
 import uvicorn
 from google.adk import Agent
 from google.adk.agents import SequentialAgent
-from google.adk.models.google_llm import Gemini
+from google.adk.models.lite_llm import LiteLlm
 from google.adk.tools.tool_context import ToolContext
 
 # LOGGING
@@ -18,8 +18,8 @@ logging.basicConfig(
 )
 load_dotenv()
 
-# MODEL SETUP (Native Gemini)
-GEMINI_MODEL = Gemini(model="gemini-1.5-flash")
+# MODEL SETUP (OpenAI via LiteLLM)
+OPENAI_MODEL = LiteLlm(model=f"openai/{os.getenv('MODEL', 'gpt-4o-mini')}")
 
 # DATABASE SETUP (SQLite for Render compatibility)
 def get_db():
@@ -96,7 +96,7 @@ def get_progress() -> str:
 # AGENT
 root_agent = Agent(
     name="gym_coach",
-    model=GEMINI_MODEL,
+    model=OPENAI_MODEL,
     description="A friendly fitness coach that tracks workouts and fitness progress.",
     instruction="""
     You are Roman, a friendly and motivating AI fitness coach.
