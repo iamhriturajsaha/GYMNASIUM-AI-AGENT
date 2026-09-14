@@ -19,7 +19,7 @@ logging.basicConfig(
 load_dotenv()
 
 # MODEL SETUP (Groq via LiteLLM)
-GROQ_MODEL = LiteLlm(model=f"groq/{os.getenv('MODEL', 'llama-3.3-70b-versatile')}")
+GROQ_MODEL = LiteLlm(model=f"groq/{os.getenv('MODEL', 'llama-3.1-70b-versatile')}")
 
 # DATABASE SETUP (SQLite for Render compatibility)
 def get_db():
